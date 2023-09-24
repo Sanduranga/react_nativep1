@@ -1,19 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
   View,
-  Image,
-  StyleSheet,
   Text,
   TextInput,
+  Image,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import React from 'react';
 
-const Login = (props: any) => {
-  const stack = props.navigation;
-  const handlePress = () => {
-    stack.navigate('Signup');
-  };
+const Signup = () => {
   return (
     <View style={sty.container}>
       <Image
@@ -22,7 +18,7 @@ const Login = (props: any) => {
         resizeMode="cover"
       />
 
-      <Text style={sty.welcome}>WELCOME</Text>
+      <Text style={sty.welcome}>Let's start</Text>
       <View style={sty.formInput}>
         <TextInput
           style={sty.textInput}
@@ -33,34 +29,22 @@ const Login = (props: any) => {
       <View style={sty.formInput}>
         <TextInput
           style={sty.textInput}
-          placeholder="Password"
+          placeholder="Create a password"
+          placeholderTextColor={'white'}
+          secureTextEntry={true}
+        />
+      </View>
+      <View style={sty.formInput}>
+        <TextInput
+          style={sty.textInput}
+          placeholder="Confirm password"
           placeholderTextColor={'white'}
           secureTextEntry={true}
         />
       </View>
       <TouchableOpacity style={sty.loginButton}>
-        <Text style={sty.loginText}>Log in</Text>
+        <Text style={sty.loginText}>Sign Up</Text>
       </TouchableOpacity>
-      <Text
-        style={{
-          color: 'white',
-          fontWeight: 'bold',
-          alignSelf: 'flex-end',
-          marginRight: 20,
-          fontSize: 16,
-        }}>
-        Forgotten password?
-      </Text>
-      <Text
-        style={{
-          color: 'white',
-          fontWeight: 'bold',
-          fontSize: 25,
-          marginTop: 50,
-        }}
-        onPress={handlePress}>
-        Sign Up
-      </Text>
     </View>
   );
 };
@@ -73,7 +57,7 @@ const sty = StyleSheet.create({
   welcome: {
     fontWeight: 'bold',
     color: 'white',
-    fontSize: 40,
+    fontSize: 30,
     marginBottom: 40,
   },
   formInput: {
@@ -106,4 +90,5 @@ const sty = StyleSheet.create({
     textAlign: 'center',
   },
 });
-export default Login;
+
+export default Signup;
