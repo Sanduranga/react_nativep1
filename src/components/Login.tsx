@@ -6,14 +6,41 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import React from 'react';
+import {RootState} from '../redux/store';
+import {useSelector} from 'react-redux';
 
 const Login = (props: any) => {
   const stack = props.navigation;
-  const handlePress = () => {
+  let password: string;
+  let email: string;
+  const logingEmail = useSelector(
+    (state: RootState) => state.logData.userEmail,
+  );
+  const logingPassword = useSelector(
+    (state: RootState) => state.logData.password,
+  );
+
+  const enteredEmail = (e: string) => {
+    email = e;
+  };
+  const enteredPassword = (e: string) => {
+    password = e;
+  };
+
+  const handlePressLogin = () => {
+    if (logingEmail === email && logingPassword === password) {
+      stack.navigate('Home');
+    } else {
+      Alert.alert('Check your email or password');
+    }
+  };
+  const handlePressSignup = () => {
     stack.navigate('Signup');
   };
+
   return (
     <View style={sty.container}>
       <Image
@@ -28,6 +55,7 @@ const Login = (props: any) => {
           style={sty.textInput}
           placeholder="Your Email"
           placeholderTextColor={'white'}
+          onChangeText={enteredEmail}
         />
       </View>
       <View style={sty.formInput}>
@@ -36,9 +64,10 @@ const Login = (props: any) => {
           placeholder="Password"
           placeholderTextColor={'white'}
           secureTextEntry={true}
+          onChangeText={enteredPassword}
         />
       </View>
-      <TouchableOpacity style={sty.loginButton}>
+      <TouchableOpacity style={sty.loginButton} onPress={handlePressLogin}>
         <Text style={sty.loginText}>Log in</Text>
       </TouchableOpacity>
       <Text
@@ -58,7 +87,7 @@ const Login = (props: any) => {
           fontSize: 25,
           marginTop: 50,
         }}
-        onPress={handlePress}>
+        onPress={handlePressSignup}>
         Sign Up
       </Text>
     </View>

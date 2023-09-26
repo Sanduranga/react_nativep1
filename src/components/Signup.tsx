@@ -7,9 +7,35 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {loginEmail, loginPassword} from '../redux/slices/loginSlice';
 
-const Signup = () => {
+const Signup = (props: any) => {
+  const stack = props.navigation;
+  const dispatch = useDispatch();
+
+  // const enteredEmail = useSelector(
+  //   (state: RootState) => state.logData.userEmail,
+  // );
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmail = (emailField: string) => {
+    setEmail(emailField);
+  };
+
+  const handlePassword = (passwordField: string) => {
+    setPassword(passwordField);
+  };
+
+  const handlePress = () => {
+    stack.navigate('Login');
+    dispatch(loginEmail(email));
+    dispatch(loginPassword(password));
+  };
+
   return (
     <View style={sty.container}>
       <Image
@@ -24,6 +50,7 @@ const Signup = () => {
           style={sty.textInput}
           placeholder="Your Email"
           placeholderTextColor={'white'}
+          onChangeText={handleEmail}
         />
       </View>
       <View style={sty.formInput}>
@@ -40,9 +67,10 @@ const Signup = () => {
           placeholder="Confirm password"
           placeholderTextColor={'white'}
           secureTextEntry={true}
+          onChangeText={handlePassword}
         />
       </View>
-      <TouchableOpacity style={sty.loginButton}>
+      <TouchableOpacity style={sty.loginButton} onPress={handlePress}>
         <Text style={sty.loginText}>Sign Up</Text>
       </TouchableOpacity>
     </View>
