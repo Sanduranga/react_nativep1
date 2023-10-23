@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import axios from 'axios';
 export const fetchData = createAsyncThunk('gallery/fetchImages', async () => {
   let pageNo = 1;
@@ -12,16 +12,22 @@ interface initialtypes {
   items: [];
   loading: boolean;
   error?: string;
+  cart: [];
 }
 const initialState: initialtypes = {
   items: [],
   loading: false,
   error: '',
+  cart: [],
 };
 const itemsSlice = createSlice({
   name: 'fetchItems',
   initialState,
-  reducers: {},
+  reducers: {
+    buyThis: (state, action: PayloadAction<{}>) => {
+      state.cart.unshift(action.payload);
+    },
+  },
   extraReducers(builder) {
     builder.addCase(fetchData.pending, state => {
       state.loading = true;
@@ -38,4 +44,4 @@ const itemsSlice = createSlice({
   },
 });
 export const itemsReducer = itemsSlice.reducer;
-// export const { pagePrev, pageNext } = homeItemSlice.actions;
+export const {buyThis} = itemsSlice.actions;
