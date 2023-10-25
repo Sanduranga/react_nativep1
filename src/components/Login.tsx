@@ -37,9 +37,6 @@ const Login = (props: any) => {
       Alert.alert('Check your email or password');
     }
   };
-  const handlePressSignup = () => {
-    stack.navigate('Signup');
-  };
 
   return (
     <View style={sty.container}>
@@ -87,7 +84,7 @@ const Login = (props: any) => {
           fontSize: 25,
           marginTop: 50,
         }}
-        onPress={handlePressSignup}>
+        onPress={() => stack.navigate('Signup')}>
         Sign Up
       </Text>
     </View>

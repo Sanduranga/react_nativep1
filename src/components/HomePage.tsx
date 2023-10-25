@@ -4,9 +4,10 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {buyThis, fetchData} from '../redux/slices/itemsSlice';
 import {RootState} from '../redux/store';
-import Cart from './Cart';
+import Navbar from './Navbar';
 
-const Homepage = () => {
+const Homepage = (props: any) => {
+  const stack = props.navigation;
   const dispatch = useDispatch();
   const items = useSelector((state: RootState) => state.fetchItems.items);
 
@@ -59,15 +60,19 @@ const Homepage = () => {
   );
 
   return (
-    <View style={{flex: 1, padding: 10}}>
-      <Cart />
-      <FlatList
-        data={items}
-        numColumns={2}
-        renderItem={mappingHomeItem}
-        keyExtractor={item => item.id}
-        style={{}}
-      />
+    <View style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: 'red'}}>
+        <Navbar stack={stack} />
+      </View>
+      <View style={{flex: 7}}>
+        <FlatList
+          data={items}
+          numColumns={2}
+          renderItem={mappingHomeItem}
+          keyExtractor={item => item.id}
+          style={{backgroundColor: 'yellow'}}
+        />
+      </View>
     </View>
   );
 };
