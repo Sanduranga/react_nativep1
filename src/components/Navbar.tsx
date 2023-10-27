@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StatusBar} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const Navbar = (props: any) => {
@@ -12,13 +12,18 @@ const Navbar = (props: any) => {
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: 'green',
+        backgroundColor: '#414c6e',
       }}>
+      <StatusBar backgroundColor="#414c6e" barStyle="light-content" />
       <TouchableOpacity style={{}} onPress={() => stack.navigate('Home')}>
-        <Text>SragThiQ</Text>
+        <Text style={{fontWeight: 'bold', color: 'white', fontSize: 25}}>
+          SragTeQ
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => stack.navigate('Cart')}>
-        <Text>Cart</Text>
+        <Text style={{fontWeight: 'bold', color: 'white', fontSize: 15}}>
+          Cart
+        </Text>
       </TouchableOpacity>
     </View>
   );

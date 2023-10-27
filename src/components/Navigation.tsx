@@ -16,10 +16,11 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}>
+        <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
         <Stack.Screen name="Navbar" component={Navbar} />
-        <Stack.Screen name="Home" component={HomePage} />
+
         <Stack.Screen name="Cart" component={Cart} />
       </Stack.Navigator>
     </NavigationContainer>

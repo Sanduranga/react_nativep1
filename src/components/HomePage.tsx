@@ -1,5 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Image, FlatList, ImageSourcePropType} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  ImageSourcePropType,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {buyThis, fetchData} from '../redux/slices/itemsSlice';
@@ -29,39 +36,46 @@ const Homepage = (props: any) => {
   }
 
   const mappingHomeItem = ({item}: {item: arrayItems}) => (
-    <View style={{backgroundColor: 'gray', padding: 10, margin: 5}}>
+    <View style={{backgroundColor: '#8f98b3', padding: 10, margin: 5}}>
       <Image
         style={{width: 'auto', aspectRatio: 1, resizeMode: 'cover'}}
         source={{uri: item.download_url}}
       />
       <View>
-        <Text>Rs.{item.width}</Text>
+        <Text>{item.author}</Text>
+        <Text>
+          LKR.
+          <Text style={{fontSize: 18, fontWeight: 'bold', color: 'black'}}>
+            {item.width}
+          </Text>
+        </Text>
+        <Text>+Shipping LKR.{item.height}</Text>
       </View>
-      <View>
-        <Text>Discount Rs.{item.height}</Text>
-      </View>
-      <Text
-        style={{
-          color: 'white',
-          fontWeight: 'bold',
-          fontSize: 15,
-          marginTop: 10,
-          padding: 5,
-          backgroundColor: 'green',
-          width: '50%',
-          textAlign: 'center',
-        }}
+      <TouchableOpacity
         onPress={() =>
           unshiftItemsToCart(item.width, item.download_url, item.id)
         }>
-        Buy
-      </Text>
+        <Text
+          style={{
+            color: 'black',
+            fontWeight: 'bold',
+            fontSize: 15,
+            marginTop: 10,
+            padding: 5,
+            backgroundColor: '#bdbd19',
+            width: 'auto',
+            textAlign: 'center',
+            borderRadius: 50,
+          }}>
+          Buy
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 
   return (
     <View style={{flex: 1}}>
-      <View style={{flex: 1, backgroundColor: 'red'}}>
+      <View style={{flex: 1}}>
         <Navbar stack={stack} />
       </View>
       <View style={{flex: 7}}>
@@ -70,7 +84,7 @@ const Homepage = (props: any) => {
           numColumns={2}
           renderItem={mappingHomeItem}
           keyExtractor={item => item.id}
-          style={{backgroundColor: 'yellow'}}
+          style={{backgroundColor: 'white'}}
         />
       </View>
     </View>

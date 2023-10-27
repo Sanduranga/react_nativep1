@@ -27,6 +27,12 @@ const itemsSlice = createSlice({
     buyThis: (state, action: PayloadAction<{}>) => {
       state.cart.unshift(action.payload);
     },
+    dropThis: (state, action: PayloadAction<string>) => {
+      state.cart = state.cart.filter(
+        (item: {price: number; image: string; id: string}) =>
+          item.id !== action.payload,
+      );
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchData.pending, state => {
@@ -44,4 +50,4 @@ const itemsSlice = createSlice({
   },
 });
 export const itemsReducer = itemsSlice.reducer;
-export const {buyThis} = itemsSlice.actions;
+export const {buyThis, dropThis} = itemsSlice.actions;

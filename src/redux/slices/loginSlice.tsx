@@ -6,8 +6,8 @@ interface initialValue {
 }
 
 const initialState: initialValue = {
-  userEmail: '',
-  password: '',
+  userEmail: 'Aa',
+  password: 'Aa',
 };
 
 const logingSlice = createSlice({
